@@ -1,0 +1,2 @@
+﻿split,threshold,mean_dice,mean_iou,dice_microaneurysms,dice_haemorrhages,dice_hard_exudates,dice_soft_exudates,iou_microaneurysms,iou_haemorrhages,iou_hard_exudates,iou_soft_exudates,checkpoint
+test,0.5,0.359533176653915,0.26861479381720227,0.007860319619929348,0.49497767875005527,0.5663894710165484,0.3689052551031906,0.007860319619929348,0.3497944681784483,0.4113257888842512,0.30547859604013394,checkpoints\unet_resnet34_idrid_100ep\best_model.pt
