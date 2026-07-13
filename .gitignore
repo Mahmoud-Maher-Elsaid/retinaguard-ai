@@ -1,0 +1,41 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Medical datasets - NEVER upload datasets to GitHub
+data/raw/
+data/processed/
+*.zip
+*.7z
+*.rar
+
+# Model outputs
+runs/
+checkpoints/
+weights/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Logs / experiment trackers
+logs/
+wandb/
+mlruns/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Auto-generated environment export
+requirements-freeze.txt
