@@ -1,0 +1,42 @@
+﻿dataset,component,split,item_type,path,path_exists,count,status,details
+APTOS2019,root,all,folder,D:\retinaguard-ai\data\raw\APTOS2019,True,,OK,
+APTOS2019,disease_grading,train,csv_rows,D:\retinaguard-ai\data\raw\APTOS2019\train_1.csv,True,2930,OK,"columns=['id_code', 'diagnosis']"
+APTOS2019,disease_grading,train,images,D:\retinaguard-ai\data\raw\APTOS2019\train_images,True,2930,OK,Images counted by file stem
+APTOS2019,disease_grading,train,csv_image_match,D:\retinaguard-ai\data\raw\APTOS2019\train_images,True,missing=0,OK,id_col=id_code; first_missing=[]
+APTOS2019,disease_grading,train,class_distribution,D:\retinaguard-ai\data\raw\APTOS2019\train_1.csv,True,5,OK,"{0: 1434, 1: 300, 2: 808, 3: 154, 4: 234}"
+APTOS2019,disease_grading,valid,csv_rows,D:\retinaguard-ai\data\raw\APTOS2019\valid.csv,True,366,OK,"columns=['id_code', 'diagnosis']"
+APTOS2019,disease_grading,valid,images,D:\retinaguard-ai\data\raw\APTOS2019\val_images,True,366,OK,Images counted by file stem
+APTOS2019,disease_grading,valid,csv_image_match,D:\retinaguard-ai\data\raw\APTOS2019\val_images,True,missing=0,OK,id_col=id_code; first_missing=[]
+APTOS2019,disease_grading,valid,class_distribution,D:\retinaguard-ai\data\raw\APTOS2019\valid.csv,True,5,OK,"{0: 172, 1: 40, 2: 104, 3: 22, 4: 28}"
+APTOS2019,disease_grading,test,csv_rows,D:\retinaguard-ai\data\raw\APTOS2019\test.csv,True,366,OK,"columns=['id_code', 'diagnosis']"
+APTOS2019,disease_grading,test,images,D:\retinaguard-ai\data\raw\APTOS2019\test_images,True,366,OK,Images counted by file stem
+APTOS2019,disease_grading,test,csv_image_match,D:\retinaguard-ai\data\raw\APTOS2019\test_images,True,missing=0,OK,id_col=id_code; first_missing=[]
+APTOS2019,disease_grading,test,class_distribution,D:\retinaguard-ai\data\raw\APTOS2019\test.csv,True,5,OK,"{0: 199, 1: 30, 2: 87, 3: 17, 4: 33}"
+IDRiD,disease_grading,root,folder,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading,True,,OK,
+IDRiD,disease_grading,train,csv_rows,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\2. Groundtruths\a. IDRiD_Disease Grading_Training Labels.csv,True,413,OK,"columns=['Image name', 'Retinopathy grade', 'Risk of macular edema ', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11']"
+IDRiD,disease_grading,train,images,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\a. Training Set,True,413,OK,Images counted by file stem
+IDRiD,disease_grading,train,csv_image_match,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\a. Training Set,True,missing=0,OK,id_col=Image name; first_missing=[]
+IDRiD,disease_grading,train,class_distribution,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\2. Groundtruths\a. IDRiD_Disease Grading_Training Labels.csv,True,5,OK,"{0: 134, 1: 20, 2: 136, 3: 74, 4: 49}"
+IDRiD,disease_grading,test,csv_rows,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\2. Groundtruths\b. IDRiD_Disease Grading_Testing Labels.csv,True,103,OK,"columns=['Image name', 'Retinopathy grade', 'Risk of macular edema ']"
+IDRiD,disease_grading,test,images,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set,True,103,OK,Images counted by file stem
+IDRiD,disease_grading,test,csv_image_match,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set,True,missing=0,OK,id_col=Image name; first_missing=[]
+IDRiD,disease_grading,test,class_distribution,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\2. Groundtruths\b. IDRiD_Disease Grading_Testing Labels.csv,True,5,OK,"{0: 34, 1: 5, 2: 32, 3: 19, 4: 13}"
+IDRiD,segmentation,root,folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation,True,,OK,
+IDRiD,segmentation,train,original_images,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\1. Original Images\a. Training Set,True,54,OK,
+IDRiD,segmentation,test,original_images,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\1. Original Images\b. Testing Set,True,27,OK,
+IDRiD,segmentation,train,mask_root,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set,True,,OK,
+IDRiD,segmentation,train,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\1. Microaneurysms,True,54,OK,folder=1. Microaneurysms
+IDRiD,segmentation,train,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\2. Haemorrhages,True,53,OK,folder=2. Haemorrhages
+IDRiD,segmentation,train,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\3. Hard Exudates,True,54,OK,folder=3. Hard Exudates
+IDRiD,segmentation,train,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\4. Soft Exudates,True,26,OK,folder=4. Soft Exudates
+IDRiD,segmentation,train,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\5. Optic Disc,True,54,OK,folder=5. Optic Disc
+IDRiD,segmentation,test,mask_root,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set,True,,OK,
+IDRiD,segmentation,test,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\1. Microaneurysms,True,27,OK,folder=1. Microaneurysms
+IDRiD,segmentation,test,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\2. Haemorrhages,True,27,OK,folder=2. Haemorrhages
+IDRiD,segmentation,test,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\3. Hard Exudates,True,27,OK,folder=3. Hard Exudates
+IDRiD,segmentation,test,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\4. Soft Exudates,True,14,OK,folder=4. Soft Exudates
+IDRiD,segmentation,test,mask_folder,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\5. Optic Disc,True,27,OK,folder=5. Optic Disc
+IDRiD,localization,root,folder,D:\retinaguard-ai\data\raw\IDRiD\localization\C. Localization,True,,OK,
+IDRiD,localization,train,original_images,D:\retinaguard-ai\data\raw\IDRiD\localization\C. Localization\1. Original Images\a. Training Set,True,413,OK,
+IDRiD,localization,test,original_images,D:\retinaguard-ai\data\raw\IDRiD\localization\C. Localization\1. Original Images\b. Testing Set,True,103,OK,
+IDRiD,localization,all,csv_files,D:\retinaguard-ai\data\raw\IDRiD\localization\C. Localization\2. Groundtruths,True,4,OK,"['a. IDRiD_OD_Center_Training Set_Markups.csv', 'b. IDRiD_OD_Center_Testing Set_Markups.csv', 'IDRiD_Fovea_Center_Testing Set_Markups.csv', 'IDRiD_Fovea_Center_Training Set_Markups.csv']"
