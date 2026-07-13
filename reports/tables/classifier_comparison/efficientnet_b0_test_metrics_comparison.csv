@@ -1,0 +1,3 @@
+﻿split,accuracy,macro_f1,weighted_f1,qwk,checkpoint,experiment,run_name
+test,0.825136612021858,0.649980497131891,0.8240646960811351,0.8880307830366976,checkpoints\efficientnet_b0_aptos_100ep_bs16_w2\best_model.pt,old_weighted_sampler,efficientnet_b0_aptos_100ep_bs16_w2
+test,0.8360655737704918,0.6494879603656847,0.8320631105564216,0.8898621866756944,checkpoints\efficientnet_b0_aptos_100ep_bs16_no_sampler\best_model.pt,new_no_sampler,efficientnet_b0_aptos_100ep_bs16_no_sampler
