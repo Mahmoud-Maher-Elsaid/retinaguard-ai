@@ -1,5 +1,4 @@
 ﻿import timm
-import torch.nn as nn
 
 
 def create_classifier(
@@ -8,9 +7,12 @@ def create_classifier(
     pretrained: bool = True,
 ):
     """
-    Create a DR grading classifier using timm.
+    Create a diabetic retinopathy grading classifier using timm.
 
-    If pretrained weights fail to download, fallback to random initialization.
+    Examples:
+        efficientnet_b0
+        convnext_tiny
+        resnet50
     """
 
     try:
