@@ -1,0 +1,11 @@
+﻿dataset,split,mask_folder,count,path
+IDRiD,train,1. Microaneurysms,54,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\1. Microaneurysms
+IDRiD,train,2. Haemorrhages,53,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\2. Haemorrhages
+IDRiD,train,3. Hard Exudates,54,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\3. Hard Exudates
+IDRiD,train,4. Soft Exudates,26,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\4. Soft Exudates
+IDRiD,train,5. Optic Disc,54,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\a. Training Set\5. Optic Disc
+IDRiD,test,1. Microaneurysms,27,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\1. Microaneurysms
+IDRiD,test,2. Haemorrhages,27,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\2. Haemorrhages
+IDRiD,test,3. Hard Exudates,27,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\3. Hard Exudates
+IDRiD,test,4. Soft Exudates,14,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\4. Soft Exudates
+IDRiD,test,5. Optic Disc,27,D:\retinaguard-ai\data\raw\IDRiD\segmentation\A. Segmentation\2. All Segmentation Groundtruths\b. Testing Set\5. Optic Disc

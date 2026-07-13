@@ -1,0 +1,26 @@
+﻿dataset,split,label,label_name,count
+APTOS2019,test,0,No DR,199
+APTOS2019,test,1,Mild,30
+APTOS2019,test,2,Moderate,87
+APTOS2019,test,3,Severe,17
+APTOS2019,test,4,Proliferative DR,33
+APTOS2019,train,0,No DR,1434
+APTOS2019,train,1,Mild,300
+APTOS2019,train,2,Moderate,808
+APTOS2019,train,3,Severe,154
+APTOS2019,train,4,Proliferative DR,234
+APTOS2019,valid,0,No DR,172
+APTOS2019,valid,1,Mild,40
+APTOS2019,valid,2,Moderate,104
+APTOS2019,valid,3,Severe,22
+APTOS2019,valid,4,Proliferative DR,28
+IDRiD,test,0,No DR,34
+IDRiD,test,1,Mild,5
+IDRiD,test,2,Moderate,32
+IDRiD,test,3,Severe,19
+IDRiD,test,4,Proliferative DR,13
+IDRiD,train,0,No DR,134
+IDRiD,train,1,Mild,20
+IDRiD,train,2,Moderate,136
+IDRiD,train,3,Severe,74
+IDRiD,train,4,Proliferative DR,49
