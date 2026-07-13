@@ -1,0 +1,2 @@
+﻿split,mean_dice,mean_iou,dice_haemorrhages,iou_haemorrhages,threshold_haemorrhages,dice_hard_exudates,iou_hard_exudates,threshold_hard_exudates,dice_microaneurysms,iou_microaneurysms,threshold_microaneurysms,dice_soft_exudates,iou_soft_exudates,threshold_soft_exudates
+test,0.4211626333762305,0.32105631349798014,0.49650992843736375,0.35143441959560195,0.4000000059604645,0.5666348763086178,0.4117956440205927,0.6000000238418579,0.07894209615403304,0.04325067405416458,0.15000000596046448,0.5425636326049075,0.4777445163215614,0.75
