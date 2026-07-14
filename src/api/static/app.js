@@ -48,9 +48,39 @@ detailsSection.innerHTML = `
         </div>
     </div>
 
+    <div class="decision-reason-box">
+        <div class="reason-icon">!</div>
+        <div>
+            <span>Decision Reason</span>
+            <p id="decisionReasonText">Run an analysis to see why the Safety Gate made its decision.</p>
+        </div>
+    </div>
+
     <div class="lesion-panel">
         <h4>Predicted Lesion Statistics</h4>
         <div id="lesionCards" class="lesion-cards"></div>
+    </div>
+
+    <div class="box-overlay-panel">
+        <div class="box-overlay-header">
+            <div>
+                <h4>U-Net Mask-to-Box Lesion Localizer</h4>
+                <p>Bounding boxes generated from predicted lesion masks.</p>
+            </div>
+            <span id="boxCountBadge">0 boxes</span>
+        </div>
+
+        <div class="box-overlay-frame">
+            <img id="lesionBoxOverlayImage" alt="Lesion box overlay" />
+            <p id="boxOverlayPlaceholder">Lesion box overlay will appear after analysis.</p>
+        </div>
+
+        <div class="box-legend">
+            <span><i class="legend-ma"></i>Microaneurysms</span>
+            <span><i class="legend-he"></i>Haemorrhages</span>
+            <span><i class="legend-ex"></i>Hard Exudates</span>
+            <span><i class="legend-se"></i>Soft Exudates</span>
+        </div>
     </div>
 
     <div class="narrative-box">
@@ -68,7 +98,11 @@ const reportConsistency = document.getElementById("reportConsistency");
 const reportBurden = document.getElementById("reportBurden");
 const reportDevice = document.getElementById("reportDevice");
 const lesionCards = document.getElementById("lesionCards");
+const lesionBoxOverlayImage = document.getElementById("lesionBoxOverlayImage");
+const boxOverlayPlaceholder = document.getElementById("boxOverlayPlaceholder");
+const boxCountBadge = document.getElementById("boxCountBadge");
 const clinicalNarrative = document.getElementById("clinicalNarrative");
+const decisionReasonText = document.getElementById("decisionReasonText");
 
 let selectedFile = null;
 
@@ -178,6 +212,86 @@ function renderLesionCards(lesions) {
     });
 }
 
+function buildDecisionReason(data) {
+    const cls = data.classification;
+    const safety = data.safety_gate;
+    const quality = data.image_quality;
+
+    const decision = safety.triage_decision;
+    const reasons = [];
+
+    if (quality.image_quality_status === "poor") {
+        reasons.push("image quality is poor");
+    }
+
+    if (safety.uncertainty_level === "high") {
+        reasons.push("prediction uncertainty is high");
+    }
+
+    if (safety.lesion_grade_consistency === "inconsistent") {
+        reasons.push("lesion evidence does not match the predicted grade");
+    }
+
+    if (cls.confidence < 0.85) {
+        reasons.push("model confidence is below the high-confidence threshold");
+    }
+
+    if (cls.top2_margin < 0.45) {
+        reasons.push("the difference between the top two classes is not strong enough");
+    }
+
+    if (decision === "urgent_referral") {
+        if (reasons.length === 0) {
+            return "Urgent referral is recommended because the predicted DR grade is severe or lesion/risk evidence is high.";
+        }
+
+        return "Urgent referral is recommended because " + reasons.join(", ") + ".";
+    }
+
+    if (decision === "manual_review_required") {
+        if (reasons.length === 0) {
+            return "Manual review is required because the Safety Gate detected a reliability concern.";
+        }
+
+        return "Manual review is required because " + reasons.join(", ") + ".";
+    }
+
+    if (decision === "safe_negative_prediction") {
+        return "The prediction is considered safe negative because the model is confident, uncertainty is low, image quality is acceptable, and lesion evidence is low.";
+    }
+
+    if (decision === "routine_referral") {
+        return "Routine referral is recommended because the model predicts moderate disease or moderate risk evidence.";
+    }
+
+    if (decision === "follow_up_recommended") {
+        return "Follow-up is recommended because the model predicts mild disease and the Safety Gate did not classify the case as safe negative.";
+    }
+
+    if (decision === "low_risk_follow_up") {
+        return "Low-risk follow-up is recommended because the prediction is low severity but not strong enough to be marked as safe negative.";
+    }
+
+    return "The Safety Gate generated this decision based on confidence, uncertainty, image quality, lesion burden, and lesion-grade consistency.";
+}
+function renderLesionBoxOverlay(segmentation) {
+    if (!lesionBoxOverlayImage || !boxOverlayPlaceholder || !boxCountBadge) {
+        return;
+    }
+
+    const boxCount = segmentation.lesion_box_count || 0;
+    boxCountBadge.textContent = `${boxCount} boxes`;
+
+    if (segmentation.annotated_image_base64) {
+        lesionBoxOverlayImage.src = segmentation.annotated_image_base64;
+        lesionBoxOverlayImage.style.display = "block";
+        boxOverlayPlaceholder.style.display = "none";
+    } else {
+        lesionBoxOverlayImage.style.display = "none";
+        boxOverlayPlaceholder.style.display = "block";
+        boxOverlayPlaceholder.textContent = "No lesion box overlay was returned by the API.";
+    }
+}
 function buildNarrative(data) {
     const cls = data.classification;
     const safety = data.safety_gate;
@@ -271,9 +385,11 @@ predictBtn.addEventListener("click", async () => {
         reportConsistency.textContent = prettyText(safety.lesion_grade_consistency);
         reportBurden.textContent = formatPercent(segmentation.total_lesion_union_area_ratio);
         reportDevice.textContent = data.device || "--";
+        decisionReasonText.textContent = buildDecisionReason(data);
 
         renderProbabilityBars(cls.probabilities);
         renderLesionCards(segmentation.lesions);
+        renderLesionBoxOverlay(segmentation);
 
         clinicalNarrative.textContent = buildNarrative(data);
 
@@ -282,8 +398,11 @@ predictBtn.addEventListener("click", async () => {
         setStatus("Error", "error");
 
         clinicalNarrative.textContent = error.message;
+        decisionReasonText.textContent = "The analysis failed before the Safety Gate could generate a decision reason.";
     } finally {
         predictBtn.disabled = false;
         predictBtn.textContent = "Run RetinaGuard Analysis";
     }
 });
+
+
