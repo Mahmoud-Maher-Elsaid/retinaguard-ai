@@ -1,0 +1,104 @@
+﻿dataset,split,image_id,label,label_name,image_path,prediction,prediction_name
+IDRiD,test,IDRiD_001,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_001.jpg,3,Severe
+IDRiD,test,IDRiD_002,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_002.jpg,1,Mild
+IDRiD,test,IDRiD_003,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_003.jpg,1,Mild
+IDRiD,test,IDRiD_004,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_004.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_005,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_005.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_006,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_006.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_007,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_007.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_008,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_008.jpg,1,Mild
+IDRiD,test,IDRiD_009,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_009.jpg,2,Moderate
+IDRiD,test,IDRiD_010,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_010.jpg,2,Moderate
+IDRiD,test,IDRiD_011,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_011.jpg,2,Moderate
+IDRiD,test,IDRiD_012,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_012.jpg,0,No DR
+IDRiD,test,IDRiD_013,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_013.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_014,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_014.jpg,2,Moderate
+IDRiD,test,IDRiD_015,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_015.jpg,2,Moderate
+IDRiD,test,IDRiD_016,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_016.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_017,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_017.jpg,2,Moderate
+IDRiD,test,IDRiD_018,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_018.jpg,3,Severe
+IDRiD,test,IDRiD_019,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_019.jpg,1,Mild
+IDRiD,test,IDRiD_020,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_020.jpg,2,Moderate
+IDRiD,test,IDRiD_021,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_021.jpg,3,Severe
+IDRiD,test,IDRiD_022,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_022.jpg,3,Severe
+IDRiD,test,IDRiD_023,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_023.jpg,2,Moderate
+IDRiD,test,IDRiD_024,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_024.jpg,1,Mild
+IDRiD,test,IDRiD_025,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_025.jpg,3,Severe
+IDRiD,test,IDRiD_026,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_026.jpg,3,Severe
+IDRiD,test,IDRiD_027,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_027.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_028,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_028.jpg,2,Moderate
+IDRiD,test,IDRiD_029,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_029.jpg,0,No DR
+IDRiD,test,IDRiD_030,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_030.jpg,0,No DR
+IDRiD,test,IDRiD_031,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_031.jpg,0,No DR
+IDRiD,test,IDRiD_032,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_032.jpg,2,Moderate
+IDRiD,test,IDRiD_033,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_033.jpg,1,Mild
+IDRiD,test,IDRiD_034,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_034.jpg,2,Moderate
+IDRiD,test,IDRiD_035,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_035.jpg,2,Moderate
+IDRiD,test,IDRiD_036,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_036.jpg,2,Moderate
+IDRiD,test,IDRiD_037,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_037.jpg,0,No DR
+IDRiD,test,IDRiD_038,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_038.jpg,0,No DR
+IDRiD,test,IDRiD_039,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_039.jpg,0,No DR
+IDRiD,test,IDRiD_040,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_040.jpg,2,Moderate
+IDRiD,test,IDRiD_041,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_041.jpg,0,No DR
+IDRiD,test,IDRiD_042,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_042.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_043,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_043.jpg,0,No DR
+IDRiD,test,IDRiD_044,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_044.jpg,0,No DR
+IDRiD,test,IDRiD_045,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_045.jpg,0,No DR
+IDRiD,test,IDRiD_046,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_046.jpg,1,Mild
+IDRiD,test,IDRiD_047,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_047.jpg,1,Mild
+IDRiD,test,IDRiD_048,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_048.jpg,2,Moderate
+IDRiD,test,IDRiD_049,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_049.jpg,2,Moderate
+IDRiD,test,IDRiD_050,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_050.jpg,0,No DR
+IDRiD,test,IDRiD_051,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_051.jpg,2,Moderate
+IDRiD,test,IDRiD_052,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_052.jpg,0,No DR
+IDRiD,test,IDRiD_053,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_053.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_054,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_054.jpg,1,Mild
+IDRiD,test,IDRiD_055,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_055.jpg,0,No DR
+IDRiD,test,IDRiD_056,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_056.jpg,0,No DR
+IDRiD,test,IDRiD_057,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_057.jpg,3,Severe
+IDRiD,test,IDRiD_058,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_058.jpg,0,No DR
+IDRiD,test,IDRiD_059,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_059.jpg,1,Mild
+IDRiD,test,IDRiD_060,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_060.jpg,0,No DR
+IDRiD,test,IDRiD_061,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_061.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_062,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_062.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_063,1,Mild,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_063.jpg,1,Mild
+IDRiD,test,IDRiD_064,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_064.jpg,0,No DR
+IDRiD,test,IDRiD_065,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_065.jpg,1,Mild
+IDRiD,test,IDRiD_066,3,Severe,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_066.jpg,2,Moderate
+IDRiD,test,IDRiD_067,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_067.jpg,1,Mild
+IDRiD,test,IDRiD_068,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_068.jpg,0,No DR
+IDRiD,test,IDRiD_069,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_069.jpg,0,No DR
+IDRiD,test,IDRiD_070,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_070.jpg,0,No DR
+IDRiD,test,IDRiD_071,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_071.jpg,0,No DR
+IDRiD,test,IDRiD_072,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_072.jpg,2,Moderate
+IDRiD,test,IDRiD_073,1,Mild,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_073.jpg,1,Mild
+IDRiD,test,IDRiD_074,1,Mild,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_074.jpg,1,Mild
+IDRiD,test,IDRiD_075,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_075.jpg,0,No DR
+IDRiD,test,IDRiD_076,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_076.jpg,0,No DR
+IDRiD,test,IDRiD_077,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_077.jpg,0,No DR
+IDRiD,test,IDRiD_078,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_078.jpg,0,No DR
+IDRiD,test,IDRiD_079,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_079.jpg,0,No DR
+IDRiD,test,IDRiD_080,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_080.jpg,0,No DR
+IDRiD,test,IDRiD_081,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_081.jpg,0,No DR
+IDRiD,test,IDRiD_082,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_082.jpg,1,Mild
+IDRiD,test,IDRiD_083,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_083.jpg,0,No DR
+IDRiD,test,IDRiD_084,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_084.jpg,0,No DR
+IDRiD,test,IDRiD_085,1,Mild,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_085.jpg,0,No DR
+IDRiD,test,IDRiD_086,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_086.jpg,0,No DR
+IDRiD,test,IDRiD_087,4,Proliferative DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_087.jpg,1,Mild
+IDRiD,test,IDRiD_088,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_088.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_089,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_089.jpg,4,Proliferative DR
+IDRiD,test,IDRiD_090,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_090.jpg,0,No DR
+IDRiD,test,IDRiD_091,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_091.jpg,2,Moderate
+IDRiD,test,IDRiD_092,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_092.jpg,0,No DR
+IDRiD,test,IDRiD_093,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_093.jpg,0,No DR
+IDRiD,test,IDRiD_094,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_094.jpg,0,No DR
+IDRiD,test,IDRiD_095,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_095.jpg,0,No DR
+IDRiD,test,IDRiD_096,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_096.jpg,1,Mild
+IDRiD,test,IDRiD_097,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_097.jpg,0,No DR
+IDRiD,test,IDRiD_098,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_098.jpg,0,No DR
+IDRiD,test,IDRiD_099,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_099.jpg,0,No DR
+IDRiD,test,IDRiD_100,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_100.jpg,0,No DR
+IDRiD,test,IDRiD_101,1,Mild,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_101.jpg,0,No DR
+IDRiD,test,IDRiD_102,2,Moderate,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_102.jpg,1,Mild
+IDRiD,test,IDRiD_103,0,No DR,D:\retinaguard-ai\data\raw\IDRiD\disease_grading\B. Disease Grading\1. Original Images\b. Testing Set\IDRiD_103.jpg,0,No DR

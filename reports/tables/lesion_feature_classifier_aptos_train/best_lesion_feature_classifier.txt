@@ -1,0 +1,5 @@
+best_model_name=random_forest_balanced
+selection_split=aptos_valid
+selection_metric=qwk
+best_valid_qwk=0.7572076901611174
+best_valid_macro_f1=0.525413560988861
