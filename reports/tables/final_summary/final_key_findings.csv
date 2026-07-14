@@ -1,0 +1,9 @@
+﻿section,finding,evidence,decision
+Classification,Best EfficientNet-B0 overall model is no-sampler.,"Highest QWK=0.8899, accuracy=0.8361, weighted_f1=0.8321.",Use efficientnet_b0_aptos_100ep_bs16_no_sampler as the main image-only baseline.
+Classification,Label smoothing improved macro F1 slightly but reduced QWK.,Best macro_f1 experiment=no_sampler_lowlr_smooth with macro_f1=0.6513.,"Keep label smoothing as an ablation, not the final baseline."
+Segmentation,Validation-tuned thresholds improved U-Net segmentation substantially.,"IDRiD test mean Dice=0.4831, hard exudates Dice=0.6896, soft exudates Dice=0.5999.",Use tuned-threshold segmentation results in README and qualitative figures.
+Segmentation,Microaneurysm segmentation remains the weakest lesion channel.,Microaneurysm Dice=0.0712.,Report this honestly as a limitation and future improvement target.
+Lesion features,Lesion features alone contain useful disease signal but are weaker than EfficientNet.,Best lesion-feature-only APTOS test QWK=0.7752 using logistic_regression_balanced.,"Use lesion features as interpretable auxiliary features, not as a replacement for image models."
+Late fusion,Probability-only meta-classifier achieved the highest APTOS test QWK.,Best APTOS test QWK=0.8965 using prob_only_logistic_balanced.,"Treat this as calibration/meta-classification, not lesion-based improvement."
+Late fusion,Lesion fusion improved some metrics but did not consistently dominate QWK.,Best APTOS test Macro F1=0.6716 using late_fusion_extra_trees_balanced.,"Report fusion results as mixed: useful for interpretability and some metric gains, but image-only EfficientNet remains very strong."
+Lesion feature QA,Total predicted lesion area strongly correlates with DR grade.,ALL Spearman correlation=0.7661.,Use this as the main evidence that U-Net-derived lesion features are medically meaningful.

@@ -1,0 +1,10 @@
+﻿experiment_group,model,split,accuracy,macro_f1,weighted_f1,qwk,notes
+Lesion-feature-only classifier,logistic_regression_balanced,aptos_valid,0.6366120218579235,0.4760157277930242,0.6475257121366369,0.7085674678812783,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,logistic_regression_balanced,aptos_test,0.6967213114754098,0.5406086936719599,0.7166616340537091,0.7751812064046738,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,logistic_regression_balanced,idrid_test,0.5436893203883495,0.4551282051282051,0.5374035349763505,0.6852738632735896,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,random_forest_balanced,aptos_valid,0.7295081967213115,0.525413560988861,0.7135604258649445,0.7572076901611174,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,random_forest_balanced,aptos_test,0.7513661202185792,0.4977701823579966,0.7330181380146322,0.7622717519814336,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,random_forest_balanced,idrid_test,0.5631067961165048,0.3917686405665945,0.5197091389726654,0.6671107492660302,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,extra_trees_balanced,aptos_valid,0.7131147540983607,0.519331874073259,0.7042321431117845,0.7568241450792225,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,extra_trees_balanced,aptos_test,0.7595628415300546,0.5331737880391066,0.7451035483054892,0.7468196096826005,Uses U-Net lesion statistics only
+Lesion-feature-only classifier,extra_trees_balanced,idrid_test,0.5922330097087378,0.478452560511384,0.5635308691562261,0.6997386409328508,Uses U-Net lesion statistics only
