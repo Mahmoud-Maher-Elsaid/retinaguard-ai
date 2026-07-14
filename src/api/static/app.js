@@ -371,8 +371,7 @@ predictBtn.addEventListener("click", async () => {
         const quality = data.image_quality;
         const segmentation = data.segmentation;
 
-        resultTitle.textContent = "Analysis completed";
-        setStatus("Completed", "done");
+        if (isDemo) { resultTitle.textContent = "Demo analysis completed"; setStatus("Demo Mode", "done"); } else { resultTitle.textContent = "Analysis completed"; setStatus("Completed", "done"); }
 
         predictedGrade.textContent = `${cls.predicted_label} - ${cls.predicted_label_name}`;
         confidence.textContent = formatPercent(cls.confidence);
@@ -406,6 +405,7 @@ predictBtn.addEventListener("click", async () => {
         predictBtn.textContent = "Run RetinaGuard Analysis";
     }
 });
+
 
 
 

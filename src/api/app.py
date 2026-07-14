@@ -78,7 +78,7 @@ def build_demo_result(image_path: Path, original_error: str) -> dict:
         "real_inference_available": False,
         "fallback_reason": "Real model inference failed, so the API returned a research demo result for interface testing.",
         "original_error": original_error,
-        "device": "demo-fallback",
+        "device": "Demo Mode",
         "classification": {
             "predicted_label": 2,
             "predicted_label_name": "Moderate",
@@ -156,3 +156,4 @@ async def predict(file: UploadFile = File(...)):
             temp_path.unlink(missing_ok=True)
         except Exception:
             pass
+
