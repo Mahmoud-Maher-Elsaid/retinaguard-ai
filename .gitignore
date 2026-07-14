@@ -40,3 +40,10 @@ Thumbs.db
 # Auto-generated environment export
 requirements-freeze.txt
 archives/
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
