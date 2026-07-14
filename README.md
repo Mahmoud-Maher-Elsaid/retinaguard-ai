@@ -528,3 +528,13 @@ data/raw/IDRiD/localization/
 See:
 
 docs/data_setup.md
+
+---
+
+## Research Paper
+
+A professional LaTeX research paper draft is available here:
+
+paper/retinaguard_ai_paper.tex
+
+The paper describes the full RetinaGuard-AI framework, including disease grading, lesion segmentation, lesion feature extraction, late fusion, explainability, safety triage, deployment, limitations, and ethical considerations.
