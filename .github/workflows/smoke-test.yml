@@ -1,0 +1,41 @@
+﻿name: Smoke Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check required files
+        shell: bash
+        run: |
+          test -f README.md
+          test -f requirements.txt
+          test -f requirements-api.txt
+          test -f docs/model_weights.md
+          test -f docs/data_setup.md
+          test -f docs/architecture.md
+          test -f paper/retinaguard_ai_paper.tex
+          test -f paper/references.bib
+          test -f paper/retinaguard_ai_paper.pdf
+          test -d src
+          test -d src/api
+          test -d src/training
+          test -d src/evaluation
+      - name: Check forbidden tracked files
+        shell: bash
+        run: |
+          bad=$(git ls-files | grep -E "^(data/raw/|data/processed/|\.venv/|checkpoints/|weights/|runs/|wandb/|mlruns/)" || true)
+          if [ -n "$bad" ]; then echo "$bad"; exit 1; fi
+      - name: Compile Python files
+        shell: bash
+        run: |
+          python -m compileall src

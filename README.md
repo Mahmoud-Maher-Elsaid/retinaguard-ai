@@ -578,3 +578,11 @@ Recommended files:
 - docs/screenshots/prediction_result.png
 - docs/screenshots/lesion_overlay.png
 - docs/screenshots/safety_triage.png
+
+---
+
+## Reproducibility
+
+A reproducibility guide is available at docs/reproduce_results.md.
+
+A GitHub Actions smoke test checks the repository structure, forbidden tracked files, and Python syntax.
