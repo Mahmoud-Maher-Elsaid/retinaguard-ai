@@ -1,3 +1,16 @@
 ﻿fastapi
 uvicorn[standard]
 python-multipart
+pydantic
+pillow
+numpy
+opencv-python
+torch
+torchvision
+timm
+segmentation-models-pytorch
+albumentations
+PyYAML
+joblib
+scikit-learn
+pandas

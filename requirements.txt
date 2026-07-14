@@ -1,0 +1,30 @@
+﻿# Core data and scientific stack
+numpy
+pandas
+matplotlib
+scikit-learn
+scipy
+pillow
+opencv-python
+tqdm
+rich
+PyYAML
+joblib
+
+# Deep learning
+torch
+torchvision
+torchaudio
+timm
+segmentation-models-pytorch
+torchmetrics
+albumentations
+grad-cam
+einops
+monai
+
+# API and demo
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic

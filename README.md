@@ -538,3 +538,9 @@ A professional LaTeX research paper draft is available here:
 paper/retinaguard_ai_paper.tex
 
 The paper describes the full RetinaGuard-AI framework, including disease grading, lesion segmentation, lesion feature extraction, late fusion, explainability, safety triage, deployment, limitations, and ethical considerations.
+
+---
+
+## Model Weights
+
+Trained checkpoints are not uploaded to GitHub. See docs/model_weights.md for the expected local checkpoint structure and API configuration notes.
