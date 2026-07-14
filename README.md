@@ -393,6 +393,55 @@ python src/evaluation/build_final_summary.py
 
 ---
 
+
+---
+
+## Deployment and Governance Package
+
+RetinaGuard-AI includes a deployment and governance package that makes the project closer to a real research-grade medical AI system.
+
+Added components:
+
+- Single-image inference pipeline
+- FastAPI backend
+- Custom black/red web interface
+- API configuration file
+- API requirements file
+- Deployment guide
+- Model card
+- Dataset card
+- Clinical safety protocol
+- Reproducibility checklist
+- Portfolio summary
+- Research paper draft
+
+Main files:
+
+- src/inference/retinaguard_single_image.py
+- src/api/app.py
+- src/api/static/
+- configs/api/example_api_config.yaml
+- requirements-api.txt
+- docs/deployment_guide.md
+- docs/model_card.md
+- docs/dataset_card.md
+- docs/clinical_safety_protocol.md
+- docs/reproducibility_checklist.md
+- docs/project_portfolio_summary.md
+- docs/research_paper_draft.md
+
+Run the web demo:
+
+uvicorn src.api.app:app --host 0.0.0.0 --port 8000
+
+Then open:
+
+http://127.0.0.1:8000
+
+The web interface supports fundus image upload, DR prediction, class probabilities, lesion statistics, Safety Gate triage, and U-Net mask-to-box lesion localization.
+
+This package is for research demonstration only and is not a clinical product.
+
 ## Reports
 
 Important result files:
@@ -456,4 +505,5 @@ Mahmoud Maher El-Said
 
 Artificial Intelligence - Intelligent Systems  
 Arab Academy for Science, Technology & Maritime Transport
+
 

@@ -1,0 +1,18 @@
+﻿project_name: RetinaGuard-AI
+mode: research_api
+
+checkpoints:
+  classifier: checkpoints/efficientnet_b0_aptos_100ep_bs16_no_sampler/best_model.pt
+  segmentation: checkpoints/unet_resnet34_idrid_100ep/best_model.pt
+
+thresholds:
+  csv: reports/tables/unet_resnet34_idrid_100ep/best_thresholds_validation.csv
+
+inference:
+  classification_image_size: 384
+  segmentation_image_size: 512
+  encoder_name: resnet34
+  amp: true
+
+safety:
+  disclaimer: Research prototype only. Not for clinical diagnosis.
