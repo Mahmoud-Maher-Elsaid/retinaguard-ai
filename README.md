@@ -1,4 +1,4 @@
-# RetinaGuard-AI
+﻿# RetinaGuard-AI
 
 **RetinaGuard-AI** is an end-to-end diabetic retinopathy analysis project that combines image-based grading, lesion segmentation, lesion-derived feature analysis, and late-fusion experiments.
 
@@ -193,6 +193,37 @@ APTOS test QWK: 0.8965
 ```
 
 The probability-only meta-classifier achieved the highest QWK. Lesion fusion improved some metrics such as accuracy and macro F1, but did not consistently dominate QWK.
+
+
+---
+
+## 6. RetinaGuard Safety Gate
+
+RetinaGuard-AI includes an uncertainty-aware safety triage layer.
+
+This layer combines EfficientNet confidence, prediction entropy, top-2 probability margin, fundus image quality, U-Net lesion burden, and lesion-grade consistency.
+
+It produces a safety-aware decision instead of only a class prediction:
+
+- safe_negative_prediction
+- low_risk_follow_up
+- follow_up_recommended
+- routine_referral
+- urgent_referral
+- manual_review_required
+
+### Safety Gate Summary
+
+| Triage Decision | Count |
+|---|---:|
+| Manual review required | 2773 |
+| Safe negative prediction | 655 |
+| Urgent referral | 191 |
+| Routine referral | 77 |
+| Follow-up recommended | 65 |
+| Low-risk follow-up | 4 |
+
+This stage makes RetinaGuard-AI more realistic because it asks whether a prediction is safe to trust or should be reviewed manually.
 
 ---
 
@@ -425,3 +456,4 @@ Mahmoud Maher El-Said
 
 Artificial Intelligence - Intelligent Systems  
 Arab Academy for Science, Technology & Maritime Transport
+
