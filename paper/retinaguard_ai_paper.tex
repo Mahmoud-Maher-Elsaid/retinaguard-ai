@@ -1,0 +1,258 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{balance}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\title{RetinaGuard-AI: A Multi-Stage Deep Learning Framework for Diabetic Retinopathy Grading, Lesion Segmentation, Explainability, and Safety-Aware Triage}
+
+\author{
+\IEEEauthorblockN{Mahmoud Maher El-Said}
+\IEEEauthorblockA{
+Artificial Intelligence -- Intelligent Systems\\
+Arab Academy for Science, Technology and Maritime Transport\\
+Damietta, Egypt\\
+Email: mahmoud.maher.elsaid@outlook.com
+}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Diabetic retinopathy is a major retinal complication of diabetes and one of the leading causes of preventable visual impairment. Automated analysis of retinal fundus images has become an important research direction in medical computer vision, but many deep learning systems focus only on image-level disease grading and provide limited evidence about why a decision was produced. This paper presents RetinaGuard-AI, a multi-stage deep learning framework for diabetic retinopathy analysis from color fundus images. The framework integrates EfficientNet-B0 for disease grading, U-Net with a ResNet-34 encoder for lesion segmentation, lesion feature extraction, late fusion between image-level predictions and lesion-derived evidence, Grad-CAM-style explainability, mask-to-box lesion localization, and a conservative safety-aware triage layer. The system is evaluated using APTOS2019 and IDRiD datasets. The EfficientNet-B0 image-level classifier achieved 0.8361 accuracy, 0.8321 weighted F1-score, and 0.8899 quadratic weighted kappa on the APTOS test set. The tuned U-Net lesion segmentation model achieved 0.4831 mean Dice and 0.3480 mean intersection-over-union on the IDRiD test set. Late fusion improved test accuracy to 0.8470 and macro F1-score to 0.6716 while maintaining competitive quadratic weighted kappa. A safety triage gate was added to route uncertain, low-quality, or clinically inconsistent cases to manual review. RetinaGuard-AI is not a clinical diagnostic product; it is a research-oriented, reproducible, deployment-aware framework for exploring safer diabetic retinopathy AI systems.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Diabetic retinopathy, fundus images, deep learning, EfficientNet, U-Net, lesion segmentation, explainable AI, safety triage, medical computer vision.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Diabetic retinopathy (DR) is a diabetes-related retinal disease that can cause vision loss if it is not detected and managed early. Screening programs commonly rely on color fundus photography, followed by assessment from trained clinicians or graders. However, manual assessment can be expensive, time-consuming, and difficult to scale in regions with limited ophthalmology resources. Deep learning has shown strong potential for automatic DR detection and grading, especially when large collections of fundus images are available for training and validation \cite{gulshan2016dr}.
+
+A practical medical AI system should not be evaluated only by classification accuracy. In sensitive domains, the system should expose evidence, uncertainty, limitations, and failure modes. A high-confidence output without supporting evidence can be dangerous when image quality is poor, the disease presentation is atypical, or the model is outside its training distribution. Therefore, a research-grade DR system should combine image-level prediction with lesion-level reasoning, explainability, and safety-aware decision handling.
+
+RetinaGuard-AI addresses this by structuring DR analysis as a complete pipeline rather than a single classification script. The framework combines disease grading, lesion segmentation, lesion evidence extraction, late fusion, explainability, and conservative triage. The system also includes a FastAPI backend and a web interface to demonstrate interactive deployment while clearly stating that it is not a certified medical device.
+
+The main contributions of this work are:
+\begin{itemize}
+    \item A reproducible multi-stage framework for DR grading, lesion segmentation, lesion evidence extraction, late fusion, explainability, and safety-aware triage.
+    \item A practical evaluation pipeline using APTOS2019 for grading and IDRiD for grading, segmentation, and localization-related analysis.
+    \item A lesion feature module that converts predicted segmentation masks into interpretable evidence features.
+    \item A conservative safety gate that routes uncertain, low-quality, or inconsistent cases to manual review.
+    \item A deployment-aware FastAPI and web interface for research demonstration and portfolio presentation.
+\end{itemize}
+
+\section{Related Work}
+Deep convolutional neural networks have become central to retinal image analysis. Gulshan et al. demonstrated that deep learning can detect diabetic retinopathy from retinal fundus photographs with strong performance in a clinical screening context \cite{gulshan2016dr}. EfficientNet introduced compound model scaling to balance network depth, width, and resolution, producing strong accuracy-efficiency trade-offs \cite{tan2019efficientnet}. This makes EfficientNet-B0 a suitable baseline for a reproducible research prototype because it provides strong performance with moderate computational cost.
+
+For biomedical segmentation, U-Net remains one of the most influential architectures \cite{ronneberger2015unet}. Its encoder-decoder structure with skip connections helps preserve spatial information while learning semantic context. This is important for retinal lesion segmentation because lesions can be small, sparse, low-contrast, and class-imbalanced. IDRiD provides lesion-level annotations and is widely used for DR segmentation experiments \cite{porwal2018idrid}.
+
+Explainable AI methods such as Grad-CAM highlight regions that contribute to classification decisions \cite{selvaraju2017gradcam}. These visualizations are not complete causal explanations, but they are useful for debugging and qualitative review. RetinaGuard-AI combines Grad-CAM-style explainability with lesion segmentation and triage rules to avoid presenting a classifier score as the only evidence.
+
+\section{Datasets}
+\subsection{APTOS2019}
+APTOS2019 is used as the primary disease grading dataset \cite{aptos2019}. It contains color fundus images labeled into five DR severity grades: no DR, mild, moderate, severe, and proliferative DR. In this project, the verified split contains 2,930 training images, 366 validation images, and 366 test images. The dataset verification script confirmed that all CSV entries match image files with zero missing images.
+
+\subsection{IDRiD}
+IDRiD is used for disease grading, lesion segmentation, and localization-related analysis \cite{porwal2018idrid}. The verified disease grading split contains 413 training images and 103 testing images. The segmentation subset contains 54 training fundus images and 27 testing fundus images. Segmentation masks include microaneurysms, haemorrhages, hard exudates, soft exudates, and optic disc annotations. The localization component contains 413 training images, 103 testing images, and four localization CSV files.
+
+\subsection{Local Dataset Layout}
+The final local dataset structure used by the code is:
+\begin{verbatim}
+data/raw/APTOS2019/
+data/raw/IDRiD/segmentation/A. Segmentation/
+data/raw/IDRiD/disease_grading/B. Disease Grading/
+data/raw/IDRiD/localization/C. Localization/
+\end{verbatim}
+Raw datasets are intentionally excluded from GitHub because of size and licensing considerations. The repository stores code, documentation, reports, and reproducibility instructions, while raw medical images remain local.
+
+\section{Methodology}
+\subsection{System Overview}
+RetinaGuard-AI is organized as a modular pipeline:
+\begin{enumerate}
+    \item Dataset verification for paths, image counts, CSV labels, and image-label matching.
+    \item Image-level DR grading using EfficientNet-B0.
+    \item Lesion segmentation using U-Net with a ResNet-34 encoder.
+    \item Per-lesion threshold tuning for segmentation outputs.
+    \item Lesion feature extraction from predicted masks.
+    \item Lesion-feature-only classifiers.
+    \item Late fusion between classifier probabilities and lesion-derived features.
+    \item Explainability and lesion localization visualization.
+    \item Safety-aware triage.
+    \item FastAPI and web-based inference demonstration.
+\end{enumerate}
+
+\subsection{Disease Grading}
+The disease grading module uses EfficientNet-B0 to predict one of five DR classes. The model is trained on APTOS2019 and evaluated using accuracy, macro F1-score, weighted F1-score, and quadratic weighted kappa (QWK). QWK is important for ordinal disease grading because not all errors have equal severity. Misclassifying grade 0 as grade 4 is more severe than misclassifying grade 2 as grade 3.
+
+\subsection{Lesion Segmentation}
+The segmentation module uses U-Net with a ResNet-34 encoder. The model predicts lesion masks for retinal structures associated with DR. Because lesion classes have different visual properties and class imbalance levels, a single global threshold is not ideal. The tuned thresholds used in this project are 0.15 for microaneurysms, 0.40 for haemorrhages, 0.60 for hard exudates, and 0.75 for soft exudates.
+
+\subsection{Lesion Feature Extraction}
+Predicted segmentation masks are converted into lesion evidence features such as lesion area, total lesion union, and per-lesion coverage. These features form a complementary evidence channel. The goal is not to replace the image classifier, but to allow the system to compare image-level predictions against lesion-level evidence.
+
+\subsection{Late Fusion}
+Late fusion combines EfficientNet probability outputs with lesion-derived features. Logistic regression, random forest, and extra trees classifiers are evaluated. The purpose is to test whether lesion evidence improves or stabilizes disease grading, especially for metrics affected by class imbalance such as macro F1-score.
+
+\subsection{Explainability and Localization}
+RetinaGuard-AI includes Grad-CAM-style visualizations and U-Net mask-to-box lesion localization. Explainability heatmaps provide qualitative evidence for image-level predictions, while lesion masks and bounding boxes identify suspicious regions. These outputs are useful for review, debugging, and demonstration.
+
+\subsection{Safety-Aware Triage}
+The safety gate evaluates prediction confidence, uncertainty, image quality, lesion evidence, and consistency between grading and segmentation evidence. Cases that are uncertain, low-quality, or inconsistent are routed to manual review. Triage categories include safe negative prediction, low-risk follow-up, follow-up recommended, routine referral, urgent referral, and manual review required. This design reduces the risk of presenting uncertain predictions as final medical decisions.
+
+\section{Experiments}
+\subsection{Experimental Environment}
+The project was developed using Python 3.12.10 and PyTorch 2.11.0 with CUDA 12.8 support. The GPU used for local experimentation was an NVIDIA RTX 3070 Ti Laptop GPU. The repository includes scripts for dataset verification, training, evaluation, threshold tuning, feature extraction, fusion, explainability, safety reports, and API inference.
+
+\subsection{Classification Results}
+Table~\ref{tab:classification} shows APTOS2019 test performance for EfficientNet-B0 variants. The no-sampler model achieved the best balance and was selected as the main image-level classifier.
+
+\begin{table}[htbp]
+\centering
+\caption{APTOS2019 Test Performance for EfficientNet-B0 Variants}
+\label{tab:classification}
+\begin{tabular}{lcccc}
+\toprule
+Variant & Accuracy & Macro F1 & Weighted F1 & QWK \\
+\midrule
+Weighted sampler & 0.8251 & 0.6500 & 0.8241 & 0.8880 \\
+No sampler & 0.8361 & 0.6495 & 0.8321 & 0.8899 \\
+Low LR + smoothing & 0.8306 & 0.6513 & 0.8271 & 0.8708 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Segmentation Results}
+Table~\ref{tab:segmentation} shows IDRiD test segmentation performance. Lesion-specific threshold tuning improved mean Dice from 0.3595 to 0.4831 and mean IoU from 0.2686 to 0.3480.
+
+\begin{table}[htbp]
+\centering
+\caption{IDRiD Test Segmentation Performance}
+\label{tab:segmentation}
+\begin{tabular}{lcc}
+\toprule
+Setting & Mean Dice & Mean IoU \\
+\midrule
+Fixed threshold 0.5 & 0.3595 & 0.2686 \\
+Tuned thresholds & 0.4831 & 0.3480 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Per-lesion tuned Dice scores were 0.0712 for microaneurysms, 0.5717 for haemorrhages, 0.6896 for hard exudates, and 0.5999 for soft exudates. The weak microaneurysm score reflects the difficulty of segmenting very small lesions.
+
+\subsection{Lesion Feature Analysis}
+Lesion features were extracted for 4,178 images. The strongest lesion-grade association was found for total lesion union area. Table~\ref{tab:correlation} summarizes selected Spearman correlations.
+
+\begin{table}[htbp]
+\centering
+\caption{Selected Lesion Feature Correlations with DR Grade}
+\label{tab:correlation}
+\begin{tabular}{lc}
+\toprule
+Feature & Spearman Correlation \\
+\midrule
+Total lesion union & 0.7661 \\
+Hard exudates & 0.7198 \\
+Microaneurysms & 0.7065 \\
+Haemorrhages & 0.6800 \\
+Soft exudates & 0.3546 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Late Fusion Results}
+Table~\ref{tab:fusion} compares image-only and fusion models. Late fusion extra trees achieved the highest accuracy and macro F1-score among the reported models, while maintaining QWK close to the image-only baseline.
+
+\begin{table}[htbp]
+\centering
+\caption{APTOS2019 Test Performance for Fusion Models}
+\label{tab:fusion}
+\begin{tabular}{lcccc}
+\toprule
+Model & Accuracy & Macro F1 & Weighted F1 & QWK \\
+\midrule
+EfficientNet raw & 0.8361 & 0.6495 & 0.8321 & 0.8899 \\
+Probability-only logistic & 0.8388 & -- & -- & 0.8965 \\
+Late fusion logistic & 0.8443 & 0.6673 & -- & 0.8869 \\
+Late fusion extra trees & 0.8470 & 0.6716 & 0.8412 & 0.8883 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Safety Gate Results}
+The safety triage layer was applied to 3,765 cases across APTOS and IDRiD evaluation splits. Table~\ref{tab:safety} shows the distribution of triage decisions.
+
+\begin{table}[htbp]
+\centering
+\caption{Safety Triage Distribution}
+\label{tab:safety}
+\begin{tabular}{lc}
+\toprule
+Decision & Count \\
+\midrule
+Manual review required & 2773 \\
+Safe negative prediction & 655 \\
+Urgent referral & 191 \\
+Routine referral & 77 \\
+Follow-up recommended & 65 \\
+Low-risk follow-up & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The high manual-review count is intentional. The safety layer is conservative because uncertain or low-quality medical images should not be treated as final automated decisions.
+
+\section{Deployment}
+The system includes a FastAPI backend and a custom web interface. The interface supports fundus image upload, DR prediction, confidence display, class probabilities, lesion statistics, triage output, and lesion localization overlays. This deployment layer is designed for demonstration and reproducibility, not for clinical use.
+
+\section{Discussion}
+The results show that EfficientNet-B0 provides strong ordinal grading performance on APTOS2019. The QWK score of 0.8899 indicates that most errors are relatively close to the true ordinal grade. However, macro F1-score remains lower than weighted F1-score, showing that minority classes remain challenging.
+
+The segmentation model benefits significantly from per-lesion threshold tuning. This supports the idea that lesion classes should not be treated identically, especially when they differ in size, frequency, and visual appearance. Microaneurysm segmentation remains the weakest component because these lesions are small and hard to separate from artifacts.
+
+Late fusion improves accuracy and macro F1-score but does not dramatically exceed the best QWK score. This is important because it prevents overstating the benefit of fusion. The value of lesion features is not only metric improvement, but also the creation of an interpretable evidence channel.
+
+The safety gate is a key design feature. In a real medical workflow, uncertain cases should be reviewed by humans. The large manual-review group should therefore be interpreted as a conservative safety behavior rather than a failure. External validation, clinical review, calibration, and regulatory assessment would be required before any clinical use.
+
+\section{Limitations}
+This work has several limitations:
+\begin{itemize}
+    \item The system is not clinically validated and must not be used for diagnosis.
+    \item Public datasets may not represent all cameras, populations, and clinical settings.
+    \item Class imbalance affects minority-class performance.
+    \item Microaneurysm segmentation remains weak because of small lesion size and limited segmentation data.
+    \item Explainability heatmaps are supportive visualizations, not complete causal explanations.
+    \item The safety gate is rule-based and requires further calibration.
+    \item The web interface is a research demo, not a regulated medical product.
+\end{itemize}
+
+\section{Conclusion}
+This paper presented RetinaGuard-AI, a multi-stage framework for diabetic retinopathy grading, lesion segmentation, lesion evidence extraction, explainability, and safety-aware triage. The EfficientNet-B0 classifier achieved 0.8361 accuracy and 0.8899 QWK on the APTOS test set. The tuned U-Net model achieved 0.4831 mean Dice on IDRiD. Late fusion improved accuracy and macro F1-score, while the safety gate provided conservative manual-review routing for uncertain cases. RetinaGuard-AI demonstrates how a retinal AI project can move beyond simple classification by integrating evidence, interpretability, deployment, and safety considerations.
+
+\section*{Ethical Statement}
+RetinaGuard-AI is a research and educational project. It is not a certified medical device and must not be used to diagnose, treat, or manage patients. Any medical use would require clinical validation, regulatory review, security review, bias analysis, and supervision by qualified healthcare professionals.
+
+\balance
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
