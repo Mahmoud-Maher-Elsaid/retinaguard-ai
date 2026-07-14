@@ -1,5 +1,4 @@
-﻿# Core data and scientific stack
-numpy
+﻿numpy
 pandas
 matplotlib
 scikit-learn
@@ -10,8 +9,6 @@ tqdm
 rich
 PyYAML
 joblib
-
-# Deep learning
 torch
 torchvision
 torchaudio
@@ -22,8 +19,6 @@ albumentations
 grad-cam
 einops
 monai
-
-# API and demo
 fastapi
 uvicorn[standard]
 python-multipart
