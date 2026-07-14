@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RetinaGuard-AI</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="page-bg"></div>
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">◉</div>
+            <div>
+                <h1>RetinaGuard-AI</h1>
+                <p>Explainable Diabetic Retinopathy Screening</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#predict">Predict</a>
+            <a href="#safety">Safety Gate</a>
+            <a href="/docs" target="_blank">API Docs</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="overview">
+            <div class="hero-text">
+                <span class="badge">AI Medical Research Prototype</span>
+                <h2>Retinal Intelligence for Safer DR Screening</h2>
+                <p>
+                    RetinaGuard-AI combines EfficientNet grading, U-Net lesion analysis,
+                    uncertainty estimation, image quality checks, and safety-aware triage.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#predict" class="btn-primary">Analyze Fundus Image</a>
+                    <a href="/docs" target="_blank" class="btn-secondary">Open API Docs</a>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <div class="retina-orb">
+                    <div class="orb-core"></div>
+                    <div class="orb-ring"></div>
+                </div>
+                <h3>Safety-Aware Output</h3>
+                <p>Not only prediction — confidence, lesion evidence, risk score, and triage decision.</p>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span>APTOS QWK</span>
+                <strong>0.8899</strong>
+                <p>EfficientNet-B0 baseline</p>
+            </div>
+            <div class="stat-card">
+                <span>Meta QWK</span>
+                <strong>0.8965</strong>
+                <p>Probability calibration</p>
+            </div>
+            <div class="stat-card">
+                <span>U-Net Dice</span>
+                <strong>0.4831</strong>
+                <p>IDRiD tuned thresholds</p>
+            </div>
+            <div class="stat-card">
+                <span>Correlation</span>
+                <strong>0.7661</strong>
+                <p>Lesion area vs DR grade</p>
+            </div>
+        </section>
+
+        <section class="predict-section" id="predict">
+            <div class="section-heading">
+                <span>Live Demo</span>
+                <h2>Upload a Retinal Fundus Image</h2>
+                <p>The API will return DR grade, probabilities, lesion statistics, image quality, and Safety Gate decision.</p>
+            </div>
+
+            <div class="predict-layout">
+                <div class="upload-panel">
+                    <label class="drop-zone" id="dropZone">
+                        <input type="file" id="imageInput" accept="image/*" />
+                        <div class="upload-icon">⬆</div>
+                        <h3>Choose Fundus Image</h3>
+                        <p>JPG, PNG, JPEG supported</p>
+                    </label>
+
+                    <div class="preview-box">
+                        <img id="previewImage" alt="Preview" />
+                        <p id="previewPlaceholder">Image preview will appear here</p>
+                    </div>
+
+                    <button id="predictBtn" class="btn-primary full-width">
+                        Run RetinaGuard Analysis
+                    </button>
+
+                    <p class="note">
+                        Research prototype only. Not for clinical diagnosis.
+                    </p>
+                </div>
+
+                <div class="result-panel">
+                    <div class="result-header">
+                        <div>
+                            <span>Analysis Result</span>
+                            <h3 id="resultTitle">Waiting for image</h3>
+                        </div>
+                        <div id="statusPill" class="status-pill idle">Idle</div>
+                    </div>
+
+                    <div class="result-grid">
+                        <div class="result-box">
+                            <span>Predicted Grade</span>
+                            <strong id="predictedGrade">--</strong>
+                        </div>
+                        <div class="result-box">
+                            <span>Confidence</span>
+                            <strong id="confidence">--</strong>
+                        </div>
+                        <div class="result-box">
+                            <span>Risk Score</span>
+                            <strong id="riskScore">--</strong>
+                        </div>
+                        <div class="result-box">
+                            <span>Triage</span>
+                            <strong id="triageDecision">--</strong>
+                        </div>
+                    </div>
+
+                    <div class="bars-section">
+                        <h4>Class Probabilities</h4>
+                        <div id="probabilityBars"></div>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>Safety Gate Details</h4>
+                        <pre id="jsonOutput">Upload an image to see full JSON output.</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="safety-section" id="safety">
+            <div class="section-heading">
+                <span>Clinical Safety Logic</span>
+                <h2>RetinaGuard Safety Gate</h2>
+                <p>
+                    The system asks whether the prediction is safe to trust or should be reviewed manually.
+                </p>
+            </div>
+
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <h3>Uncertainty</h3>
+                    <p>Uses confidence, entropy, and top-2 probability margin.</p>
+                </div>
+                <div class="safety-card">
+                    <h3>Image Quality</h3>
+                    <p>Checks blur, brightness, and contrast before trusting the prediction.</p>
+                </div>
+                <div class="safety-card">
+                    <h3>Lesion Evidence</h3>
+                    <p>Uses U-Net lesion burden and consistency with predicted DR grade.</p>
+                </div>
+                <div class="safety-card">
+                    <h3>Triage Decision</h3>
+                    <p>Returns safe negative, follow-up, referral, urgent referral, or manual review.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>RetinaGuard-AI — Research prototype only. Not for clinical diagnosis.</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
