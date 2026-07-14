@@ -507,3 +507,24 @@ Artificial Intelligence - Intelligent Systems
 Arab Academy for Science, Technology & Maritime Transport
 
 
+
+---
+
+## Data Setup
+
+Raw datasets are not uploaded to GitHub.
+
+Local data should be placed under:
+
+D:\retinaguard-ai\data\raw
+
+Expected layout:
+
+data/raw/APTOS2019/
+data/raw/IDRiD/segmentation/
+data/raw/IDRiD/disease_grading/
+data/raw/IDRiD/localization/
+
+See:
+
+docs/data_setup.md
