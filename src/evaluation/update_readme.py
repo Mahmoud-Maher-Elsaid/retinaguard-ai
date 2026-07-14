@@ -1,4 +1,99 @@
-# RetinaGuard-AI
+﻿from pathlib import Path
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[2]
+
+def read_csv(rel):
+    return pd.read_csv(ROOT / rel)
+
+def f4(x):
+    try:
+        return f"{float(x):.4f}"
+    except Exception:
+        return str(x)
+
+def table(headers, rows):
+    lines = []
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+    for row in rows:
+        lines.append("| " + " | ".join(str(x) for x in row) + " |")
+    return "\n".join(lines)
+
+classification = read_csv("reports/tables/final_summary/final_classification_results.csv")
+segmentation = read_csv("reports/tables/final_summary/final_segmentation_results.csv")
+fusion = read_csv("reports/tables/final_summary/final_late_fusion_results.csv")
+lesion_clf = read_csv("reports/tables/final_summary/final_lesion_feature_classifier_results.csv")
+corr = read_csv("reports/tables/final_summary/final_lesion_feature_correlations.csv")
+findings = read_csv("reports/tables/final_summary/final_key_findings.csv")
+
+cls_rows = []
+for _, r in classification.iterrows():
+    cls_rows.append([
+        r["model"],
+        f4(r["accuracy"]),
+        f4(r["macro_f1"]),
+        f4(r["weighted_f1"]),
+        f4(r["qwk"]),
+    ])
+
+seg_rows = []
+for _, r in segmentation.iterrows():
+    seg_rows.append([
+        r["model"],
+        f4(r["mean_dice"]),
+        f4(r["mean_iou"]),
+        f4(r["dice_microaneurysms"]),
+        f4(r["dice_haemorrhages"]),
+        f4(r["dice_hard_exudates"]),
+        f4(r["dice_soft_exudates"]),
+    ])
+
+fusion_test = fusion[fusion["split"] == "aptos_test"].copy()
+fusion_rows = []
+for _, r in fusion_test.iterrows():
+    fusion_rows.append([
+        r["model"],
+        r["feature_set"],
+        f4(r["accuracy"]),
+        f4(r["macro_f1"]),
+        f4(r["weighted_f1"]),
+        f4(r["qwk"]),
+    ])
+
+lesion_test = lesion_clf[lesion_clf["split"] == "aptos_test"].copy()
+lesion_rows = []
+for _, r in lesion_test.iterrows():
+    lesion_rows.append([
+        r["model"],
+        f4(r["accuracy"]),
+        f4(r["macro_f1"]),
+        f4(r["weighted_f1"]),
+        f4(r["qwk"]),
+    ])
+
+corr_all = corr[corr["dataset"] == "ALL"].copy()
+corr_rows = []
+for _, r in corr_all.iterrows():
+    corr_rows.append([
+        r["feature"],
+        f4(r["spearman_corr_with_grade"]),
+        f4(r["pearson_corr_with_grade"]),
+    ])
+
+finding_rows = []
+for _, r in findings.iterrows():
+    finding_rows.append([
+        r["section"],
+        r["finding"],
+        r["decision"],
+    ])
+
+best_cls = classification.sort_values("qwk", ascending=False).iloc[0]
+best_fusion = fusion_test.sort_values("qwk", ascending=False).iloc[0]
+best_seg = segmentation.sort_values("mean_dice", ascending=False).iloc[0]
+
+readme = f"""# RetinaGuard-AI
 
 **RetinaGuard-AI** is an end-to-end diabetic retinopathy analysis project that combines image-based grading, lesion segmentation, lesion-derived feature analysis, and late-fusion experiments.
 
@@ -105,36 +200,29 @@ checkpoints/
 
 ## 1. EfficientNet-B0 Classification
 
-| Experiment | Accuracy | Macro F1 | Weighted F1 | QWK |
-| --- | --- | --- | --- | --- |
-| weighted_sampler | 0.8251 | 0.6500 | 0.8241 | 0.8880 |
-| no_sampler | 0.8361 | 0.6495 | 0.8321 | 0.8899 |
-| no_sampler_lowlr_smooth | 0.8306 | 0.6513 | 0.8271 | 0.8708 |
+{table(["Experiment", "Accuracy", "Macro F1", "Weighted F1", "QWK"], cls_rows)}
 
 ### Best image-only baseline
 
 ```text
-Model: no_sampler
-APTOS test QWK: 0.8899
-APTOS test accuracy: 0.8361
+Model: {best_cls["model"]}
+APTOS test QWK: {f4(best_cls["qwk"])}
+APTOS test accuracy: {f4(best_cls["accuracy"])}
 ```
 
 ---
 
 ## 2. U-Net Lesion Segmentation
 
-| Model | Mean Dice | Mean IoU | MA Dice | HE Dice | EX Dice | SE Dice |
-| --- | --- | --- | --- | --- | --- | --- |
-| U-Net ResNet34 raw threshold 0.5 | 0.3595 | 0.2686 | 0.0079 | 0.4950 | 0.5664 | 0.3689 |
-| U-Net ResNet34 validation-tuned thresholds | 0.4831 | 0.3480 | 0.0712 | 0.5717 | 0.6896 | 0.5999 |
+{table(["Model", "Mean Dice", "Mean IoU", "MA Dice", "HE Dice", "EX Dice", "SE Dice"], seg_rows)}
 
 ### Best segmentation result
 
 ```text
-Model: U-Net ResNet34 validation-tuned thresholds
-IDRiD test mean Dice: 0.4831
-Hard Exudates Dice: 0.6896
-Soft Exudates Dice: 0.5999
+Model: {best_seg["model"]}
+IDRiD test mean Dice: {f4(best_seg["mean_dice"])}
+Hard Exudates Dice: {f4(best_seg["dice_hard_exudates"])}
+Soft Exudates Dice: {f4(best_seg["dice_soft_exudates"])}
 ```
 
 Microaneurysm segmentation remains the weakest lesion channel.
@@ -145,14 +233,7 @@ Microaneurysm segmentation remains the weakest lesion channel.
 
 U-Net-derived lesion features showed strong correlation with diabetic retinopathy grade.
 
-| Feature | Spearman Corr. | Pearson Corr. |
-| --- | --- | --- |
-| total_lesion_union_area_ratio | 0.7661 | 0.5691 |
-| hard_exudates_area_ratio | 0.7198 | 0.3960 |
-| microaneurysms_area_ratio | 0.7065 | 0.5809 |
-| haemorrhages_area_ratio | 0.6800 | 0.4291 |
-| soft_exudates_area_ratio | 0.3546 | 0.3419 |
-| lesion_presence_count | 0.3405 | 0.3250 |
+{table(["Feature", "Spearman Corr.", "Pearson Corr."], corr_rows)}
 
 This supports the idea that predicted lesion statistics are medically meaningful and useful for interpretability.
 
@@ -162,11 +243,7 @@ This supports the idea that predicted lesion statistics are medically meaningful
 
 A classifier was trained using only U-Net-derived lesion features.
 
-| Model | Accuracy | Macro F1 | Weighted F1 | QWK |
-| --- | --- | --- | --- | --- |
-| logistic_regression_balanced | 0.6967 | 0.5406 | 0.7167 | 0.7752 |
-| random_forest_balanced | 0.7514 | 0.4978 | 0.7330 | 0.7623 |
-| extra_trees_balanced | 0.7596 | 0.5332 | 0.7451 | 0.7468 |
+{table(["Model", "Accuracy", "Macro F1", "Weighted F1", "QWK"], lesion_rows)}
 
 The lesion-feature-only classifier is weaker than EfficientNet, but it confirms that lesion statistics contain useful disease signal.
 
@@ -176,20 +253,14 @@ The lesion-feature-only classifier is weaker than EfficientNet, but it confirms 
 
 Late fusion combines EfficientNet probabilities with U-Net lesion features.
 
-| Model | Feature Set | Accuracy | Macro F1 | Weighted F1 | QWK |
-| --- | --- | --- | --- | --- | --- |
-| efficientnet_raw | image_only | 0.8361 | 0.6495 | 0.8321 | 0.8899 |
-| prob_only_logistic_balanced | prob_only | 0.8388 | 0.6531 | 0.8350 | 0.8965 |
-| late_fusion_logistic_balanced | fusion | 0.8443 | 0.6673 | 0.8390 | 0.8869 |
-| late_fusion_random_forest_balanced | fusion | 0.8415 | 0.6539 | 0.8345 | 0.8915 |
-| late_fusion_extra_trees_balanced | fusion | 0.8470 | 0.6716 | 0.8412 | 0.8883 |
+{table(["Model", "Feature Set", "Accuracy", "Macro F1", "Weighted F1", "QWK"], fusion_rows)}
 
 ### Best meta-classifier result
 
 ```text
-Model: prob_only_logistic_balanced
-Feature set: prob_only
-APTOS test QWK: 0.8965
+Model: {best_fusion["model"]}
+Feature set: {best_fusion["feature_set"]}
+APTOS test QWK: {f4(best_fusion["qwk"])}
 ```
 
 The probability-only meta-classifier achieved the highest QWK. Lesion fusion improved some metrics such as accuracy and macro F1, but did not consistently dominate QWK.
@@ -198,16 +269,7 @@ The probability-only meta-classifier achieved the highest QWK. Lesion fusion imp
 
 ## Key Findings
 
-| Section | Finding | Decision |
-| --- | --- | --- |
-| Classification | Best EfficientNet-B0 overall model is no-sampler. | Use efficientnet_b0_aptos_100ep_bs16_no_sampler as the main image-only baseline. |
-| Classification | Label smoothing improved macro F1 slightly but reduced QWK. | Keep label smoothing as an ablation, not the final baseline. |
-| Segmentation | Validation-tuned thresholds improved U-Net segmentation substantially. | Use tuned-threshold segmentation results in README and qualitative figures. |
-| Segmentation | Microaneurysm segmentation remains the weakest lesion channel. | Report this honestly as a limitation and future improvement target. |
-| Lesion features | Lesion features alone contain useful disease signal but are weaker than EfficientNet. | Use lesion features as interpretable auxiliary features, not as a replacement for image models. |
-| Late fusion | Probability-only meta-classifier achieved the highest APTOS test QWK. | Treat this as calibration/meta-classification, not lesion-based improvement. |
-| Late fusion | Lesion fusion improved some metrics but did not consistently dominate QWK. | Report fusion results as mixed: useful for interpretability and some metric gains, but image-only EfficientNet remains very strong. |
-| Lesion feature QA | Total predicted lesion area strongly correlates with DR grade. | Use this as the main evidence that U-Net-derived lesion features are medically meaningful. |
+{table(["Section", "Finding", "Decision"], finding_rows)}
 
 ---
 
@@ -266,91 +328,91 @@ python src/data/run_eda.py
 ### 4. Train EfficientNet-B0 classifier
 
 ```bash
-python src/training/train_classifier.py \
-    --model-name efficientnet_b0 \
-    --image-size 384 \
-    --batch-size 16 \
-    --epochs 100 \
-    --patience 12 \
-    --num-workers 2 \
-    --amp \
+python src/training/train_classifier.py \\
+    --model-name efficientnet_b0 \\
+    --image-size 384 \\
+    --batch-size 16 \\
+    --epochs 100 \\
+    --patience 12 \\
+    --num-workers 2 \\
+    --amp \\
     --run-name efficientnet_b0_aptos_100ep_bs16_no_sampler
 ```
 
 ### 5. Evaluate classifier
 
 ```bash
-python src/evaluation/evaluate_classifier.py \
-    --checkpoint checkpoints/efficientnet_b0_aptos_100ep_bs16_no_sampler/best_model.pt \
-    --split test \
-    --image-size 384 \
-    --batch-size 16 \
+python src/evaluation/evaluate_classifier.py \\
+    --checkpoint checkpoints/efficientnet_b0_aptos_100ep_bs16_no_sampler/best_model.pt \\
+    --split test \\
+    --image-size 384 \\
+    --batch-size 16 \\
     --run-name efficientnet_b0_aptos_100ep_bs16_no_sampler
 ```
 
 ### 6. Train U-Net
 
 ```bash
-python src/training/train_unet.py \
-    --encoder-name resnet34 \
-    --image-size 512 \
-    --batch-size 2 \
-    --epochs 100 \
-    --patience 15 \
-    --amp \
+python src/training/train_unet.py \\
+    --encoder-name resnet34 \\
+    --image-size 512 \\
+    --batch-size 2 \\
+    --epochs 100 \\
+    --patience 15 \\
+    --amp \\
     --run-name unet_resnet34_idrid_100ep
 ```
 
 ### 7. Tune U-Net thresholds
 
 ```bash
-python src/evaluation/tune_unet_thresholds.py \
-    --checkpoint checkpoints/unet_resnet34_idrid_100ep/best_model.pt \
-    --encoder-name resnet34 \
-    --image-size 512 \
-    --batch-size 1 \
+python src/evaluation/tune_unet_thresholds.py \\
+    --checkpoint checkpoints/unet_resnet34_idrid_100ep/best_model.pt \\
+    --encoder-name resnet34 \\
+    --image-size 512 \\
+    --batch-size 1 \\
     --run-name unet_resnet34_idrid_100ep
 ```
 
 ### 8. Extract lesion features
 
 ```bash
-python src/evaluation/extract_lesion_features.py \
-    --checkpoint checkpoints/unet_resnet34_idrid_100ep/best_model.pt \
-    --thresholds-csv reports/tables/unet_resnet34_idrid_100ep/best_thresholds_validation.csv \
-    --encoder-name resnet34 \
-    --image-size 512 \
-    --batch-size 2 \
-    --amp \
+python src/evaluation/extract_lesion_features.py \\
+    --checkpoint checkpoints/unet_resnet34_idrid_100ep/best_model.pt \\
+    --thresholds-csv reports/tables/unet_resnet34_idrid_100ep/best_thresholds_validation.csv \\
+    --encoder-name resnet34 \\
+    --image-size 512 \\
+    --batch-size 2 \\
+    --amp \\
     --run-name unet_resnet34_tuned_thresholds
 ```
 
 ### 9. Analyze lesion features
 
 ```bash
-python src/evaluation/analyze_lesion_features.py \
-    --features-csv reports/tables/lesion_features/unet_resnet34_tuned_thresholds_lesion_features_all.csv \
+python src/evaluation/analyze_lesion_features.py \\
+    --features-csv reports/tables/lesion_features/unet_resnet34_tuned_thresholds_lesion_features_all.csv \\
     --output-name unet_resnet34_tuned_thresholds
 ```
 
 ### 10. Train lesion-feature-only classifier
 
 ```bash
-python src/evaluation/train_lesion_feature_classifier.py \
-    --features-csv reports/tables/lesion_features/unet_resnet34_tuned_thresholds_lesion_features_all.csv \
+python src/evaluation/train_lesion_feature_classifier.py \\
+    --features-csv reports/tables/lesion_features/unet_resnet34_tuned_thresholds_lesion_features_all.csv \\
     --run-name lesion_feature_classifier_aptos_train
 ```
 
 ### 11. Train late fusion classifier
 
 ```bash
-python src/evaluation/train_late_fusion_classifier.py \
-    --efficientnet-checkpoint checkpoints/efficientnet_b0_aptos_100ep_bs16_no_sampler/best_model.pt \
-    --lesion-features-csv reports/tables/lesion_features/unet_resnet34_tuned_thresholds_lesion_features_all.csv \
-    --model-name efficientnet_b0 \
-    --image-size 384 \
-    --batch-size 16 \
-    --amp \
+python src/evaluation/train_late_fusion_classifier.py \\
+    --efficientnet-checkpoint checkpoints/efficientnet_b0_aptos_100ep_bs16_no_sampler/best_model.pt \\
+    --lesion-features-csv reports/tables/lesion_features/unet_resnet34_tuned_thresholds_lesion_features_all.csv \\
+    --model-name efficientnet_b0 \\
+    --image-size 384 \\
+    --batch-size 16 \\
+    --amp \\
     --run-name late_fusion_effnet_b0_lesion_features
 ```
 
@@ -425,3 +487,7 @@ Mahmoud Maher El-Said
 
 Artificial Intelligence - Intelligent Systems  
 Arab Academy for Science, Technology & Maritime Transport
+"""
+
+(ROOT / "README.md").write_text(readme, encoding="utf-8")
+print("README.md updated successfully.")
