@@ -1,0 +1,2 @@
+﻿split,accuracy,macro_f1,weighted_f1,qwk,checkpoint
+test,0.8306010928961749,0.6513027319192926,0.8271101103968893,0.8707644448020166,checkpoints\efficientnet_b0_aptos_100ep_bs16_no_sampler_lowlr_smooth\best_model.pt

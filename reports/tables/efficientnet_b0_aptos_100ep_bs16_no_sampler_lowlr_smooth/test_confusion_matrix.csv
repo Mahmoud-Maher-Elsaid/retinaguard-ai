@@ -1,0 +1,6 @@
+﻿,pred_0_No DR,pred_1_Mild,pred_2_Moderate,pred_3_Severe,pred_4_Proliferative DR
+true_0_No DR,196,2,1,0,0
+true_1_Mild,4,16,7,1,2
+true_2_Moderate,2,8,69,5,3
+true_3_Severe,0,0,8,7,2
+true_4_Proliferative DR,0,4,9,4,16

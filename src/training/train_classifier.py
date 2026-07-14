@@ -32,6 +32,7 @@ def parse_args():
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument("--label-smoothing", type=float, default=0.0, help="Label smoothing value for CrossEntropyLoss.")
     parser.add_argument("--no-pretrained", action="store_true")
     parser.add_argument("--amp", action="store_true")
     parser.add_argument("--weighted-sampler", action="store_true")
@@ -261,7 +262,7 @@ def main():
 
     model = model.to(device)
 
-    criterion = nn.CrossEntropyLoss(weight=class_weights)
+    criterion = nn.CrossEntropyLoss(weight=class_weights, label_smoothing=args.label_smoothing)
 
     optimizer = torch.optim.AdamW(
         model.parameters(),
