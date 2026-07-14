@@ -544,3 +544,37 @@ The paper describes the full RetinaGuard-AI framework, including disease grading
 ## Model Weights
 
 Trained checkpoints are not uploaded to GitHub. See docs/model_weights.md for the expected local checkpoint structure and API configuration notes.
+
+---
+
+## System Architecture
+
+flowchart TD
+    A[Input Fundus Image] --> B[Image Preprocessing]
+    B --> C[EfficientNet-B0 DR Classifier]
+    B --> D[U-Net ResNet34 Lesion Segmentation]
+    C --> E[Class Probabilities and DR Grade]
+    D --> F[Lesion Masks]
+    F --> G[Lesion Feature Extraction]
+    E --> H[Late Fusion Model]
+    G --> H
+    H --> I[Final DR Prediction]
+    I --> J[Safety-Aware Triage Gate]
+    J --> K[FastAPI Backend]
+    K --> L[Web Interface Output]
+```
+
+More details: docs/architecture.md
+
+---
+
+## Web Interface Screenshots
+
+Screenshots should be added under docs/screenshots/.
+
+Recommended files:
+
+- docs/screenshots/web_home.png
+- docs/screenshots/prediction_result.png
+- docs/screenshots/lesion_overlay.png
+- docs/screenshots/safety_triage.png
