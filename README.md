@@ -586,3 +586,9 @@ Recommended files:
 A reproducibility guide is available at docs/reproduce_results.md.
 
 A GitHub Actions smoke test checks the repository structure, forbidden tracked files, and Python syntax.
+
+---
+
+## Demo Fallback Mode
+
+The web API includes a demo fallback mode for interface testing when real model weights are not available. Demo outputs are clearly labeled and are not medical predictions. See docs/demo_mode.md.
