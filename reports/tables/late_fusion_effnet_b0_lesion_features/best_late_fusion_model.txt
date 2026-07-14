@@ -1,0 +1,5 @@
+best_model_name=late_fusion_logistic_balanced
+selection_split=aptos_valid
+selection_metric=qwk
+best_valid_qwk=0.9159409105942014
+best_valid_macro_f1=0.7179248201546422
